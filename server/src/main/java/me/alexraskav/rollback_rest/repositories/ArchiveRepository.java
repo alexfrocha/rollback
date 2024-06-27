@@ -14,4 +14,7 @@ public interface ArchiveRepository extends MongoRepository<Archive, String> {
 
     @Query("SELECT archive FROM Archives archive WHERE archive.folderId = :folderId")
     List<Archive> findArchivesByFolderId(@Param("folderId") String folderId);
+
+    @Query("SELECT archive FROM Archives archive WHERE archive.folderId = :folderId AND archive.userId = :userId")
+    List<Archive> findArchivesByFolderIdAndUserId(@Param("folderId") String folderId, @Param("userId") String userId);
 }

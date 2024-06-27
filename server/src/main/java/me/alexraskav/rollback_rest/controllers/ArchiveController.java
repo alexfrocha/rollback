@@ -42,6 +42,11 @@ public class ArchiveController {
         return service.getArchivesByFolderId(id);
     }
 
+    @GetMapping("/folder/source/{id}")
+    public List<Archive> getSourceFolderByUserId(@PathVariable String id) {
+        return service.getSourceFolderByUserId(id);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Archive> getArchiveById(@PathVariable String id) {
         Optional<Archive> archive  = service.getArchiveById(id);

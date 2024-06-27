@@ -27,6 +27,10 @@ public class ArchiveService {
         return archiveRepository.findArchivesByFolderId(folderId);
     }
 
+    public List<Archive> getSourceFolderByUserId(String userId) {
+        return archiveRepository.findArchivesByFolderIdAndUserId("source", userId);
+    }
+
     public Optional<Archive> getArchiveById(String id) {
         return archiveRepository.findById(id);
     }
