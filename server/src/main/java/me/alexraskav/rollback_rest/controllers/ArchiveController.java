@@ -65,10 +65,12 @@ public class ArchiveController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         Archive archive = archiveOptional.get();
-        if(!archiveDetails.getName().isEmpty()) {
+        archive.setName("");
+        archive.setContent("");
+        if(archiveDetails.getName() != null) {
             archive.setName(archiveDetails.getName());
         }
-        if(!archiveDetails.getContent().isEmpty()) {
+        if(archiveDetails.getName() != null) {
             archive.setContent(archiveDetails.getContent());
         }
         return ResponseEntity.ok(service.createArchive(archive));

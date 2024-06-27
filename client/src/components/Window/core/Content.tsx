@@ -2,33 +2,39 @@ import React, { MouseEvent, useContext, useState } from "react";
 import Archive from "../../core/Archive";
 import ContentContextMenu from "./ContentContextMenu";
 import { ArchivesContext } from "../../../context/Archives";
-import { generateRandomId } from "../../utils/id";
+import { generateRandomId } from "../../../utils/id";
+import { ArchiveProps } from "../../../interfaces/core";
 
-const Content: React.FC = () => {
+interface Props {
+  archives: ArchiveProps[];
+  setArchives: React.Dispatch<React.SetStateAction<ArchiveProps[]>>;
+}
+
+export default function Content({ archives, setArchives }: Props) {
   const initialContextMenu = {
     show: false,
     x: 0,
     y: 0,
   };
 
-  const [archives, setArchives] = useContext(ArchivesContext);
   const [contextMenu, setContextMenu] = useState(initialContextMenu);
-
   const closeContextMenu = () => setContextMenu(initialContextMenu);
 
   const createArchive = (type: string) => {
     const newArchive = {
       name: "",
-      size: 40,
-      id: generateRandomId(),
+      // id: generateRandomId(),
       type,
+      folderId: "",
+      userId: "",
+      content: "",
     };
     setArchives([...archives, newArchive]);
     closeContextMenu(); // Fechar o menu após criar o arquivo
   };
 
   const handleContextMenu = (
-    e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
+    e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
   ) => {
     e.preventDefault();
     const { clientX, clientY } = e;
@@ -42,14 +48,13 @@ const Content: React.FC = () => {
   return (
     <div className="py-5 px-10 flex flex-row items-start overflow-auto flex-wrap gap-[60px]">
       {archives.map((archive: any) => {
-        // console.log(archive.id);
         return (
           <Archive
             key={archive.id}
             id={archive.id}
             type={archive.type}
             name={archive.name}
-            size={archive.size}
+            size={40}
             setArchives={setArchives}
             archives={archives}
           />
@@ -66,6 +71,4 @@ const Content: React.FC = () => {
       )}
     </div>
   );
-};
-
-export default Content;
+}

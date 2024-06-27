@@ -2,16 +2,26 @@ import { useContext } from "react";
 import { IoIosClose } from "react-icons/io";
 import { TxtArchiveContext } from "../../../context/TxtArchive";
 
-export default function Navbar() {
+export default function Navbar({ content }: { content: string }) {
   const [txt, setTxt] = useContext(TxtArchiveContext);
   return (
     <div className="h-10 border-b px-2 border-zinc-300 w-full flex flex-row items-center justify-between">
       <div className="font-mono  justify-center w-full flex flex-row items-center gap-2">
-        <span>star.txt</span>
-        <div className="w-3 h-3 rounded-full bg-zinc-300"></div>
+        <span>{txt.name}.txt</span>
+        {content != txt.content && (
+          <div className="w-3 h-3 rounded-full bg-zinc-300"></div>
+        )}
       </div>
       <div
-        onClick={() => setTxt("")}
+        onClick={() =>
+          setTxt({
+            name: "",
+            content: "",
+            folderId: "",
+            type: "",
+            userId: "",
+          })
+        }
         className="justify-self-end text-gray-400 cursor-pointer duration-200 hover:text-red-500"
       >
         <IoIosClose size={30} />

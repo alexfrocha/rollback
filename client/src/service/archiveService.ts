@@ -1,80 +1,102 @@
 import axios from "axios";
 import { BASE_API, defaultErrorRequestMessage } from "./settings";
+import { ArchiveProps } from "../interfaces/core";
 
-interface ArchiveProps {
-  name: string;
-  folderId: string;
-  userId: string;
-  content?: string;
-}
-
-function createArchive({ name, folderId, userId, content }: ArchiveProps) {
-  const newArchive = {
+async function createArchive({
+  name,
+  folderId,
+  userId,
+  content,
+  type,
+}: ArchiveProps) {
+  let newArchive: ArchiveProps = {
     name,
     folderId,
     userId,
     content,
+    type,
   };
 
-  axios
+  await axios
     .post(`${BASE_API}/api/archives/`, newArchive)
     .then((response) => {
+      newArchive = response.data;
+      console.log(
+        `[NEW ARCHIVE] archive #${response.data.id} has been created`
+      );
       return response.data;
     })
     .catch((error) => {
       console.log(defaultErrorRequestMessage + error);
     });
+  return newArchive;
 }
 
-function updateArchive(
+async function updateArchive(
   id: string,
   { name, content }: { name?: string; content?: string }
 ) {
+  let archive: ArchiveProps = {
+    name: "",
+    folderId: "",
+    content: "",
+    userId: "",
+    type: "",
+    id: "",
+  };
   axios
     .put(`${BASE_API}/api/archives/${id}`, {
       name,
       content,
     })
     .then((response) => {
-      return response.data;
+      archive = response.data;
+      console.log(content);
+      console.log(`[UPDATE ARCHIVE] archive #${id} has been updated`);
     })
     .catch((error) => {
       console.log(defaultErrorRequestMessage + error);
     });
+  return archive;
 }
 
 function deleteArchive(id: string) {
   axios
     .delete(`${BASE_API}/api/archives/${id}`)
     .then((response) => {
-      console.log(response.data);
+      console.log(`[DELETE ARCHIVE] archive #${id} has been deleted`);
     })
     .catch((error) => {
       console.log(defaultErrorRequestMessage + error);
     });
 }
 
-function getAllArchivesByFolderId(folderId: string) {
-  axios
+async function getAllArchivesByFolderId(folderId: string) {
+  let archives: ArchiveProps[] = [];
+  await axios
     .get(`${BASE_API}/api/archives/folder/${folderId}`)
     .then((response) => {
-      console.log(response.data);
+      archives = response.data;
+      console.log(`[GET ARCHIVE] getting archives from #${folderId} folder`);
     })
     .catch((error) => {
       console.log(defaultErrorRequestMessage + error);
     });
+  return archives;
 }
 
-function getSourceFolderByUserId(userId: string) {
-  axios
+async function getSourceFolderByUserId(userId: string) {
+  let archives: ArchiveProps[] = [];
+  await axios
     .get(`${BASE_API}/api/archives/folder/source/${userId}`)
     .then((response) => {
-      console.log(response.data);
-      return response.data;
+      archives = response.data;
+      console.log(`[GET ARCHIVE] getting source archives from #${userId} user`);
     })
     .catch((error) => {
       console.log(defaultErrorRequestMessage + error);
     });
+  return archives;
 }
 
 export {
