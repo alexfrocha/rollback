@@ -1,0 +1,31 @@
+import React, { useContext, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import Window from "./components/Window";
+import Editor from "./components/Editor";
+import TxtArchiveProvider, { TxtArchiveContext } from "./context/TxtArchive";
+import { ArchivesContext } from "./context/Archives";
+import { DirectoryContext } from "./context/Directory";
+// import { getAllArchives } from "./service/archiveService";
+import axios from "axios";
+
+function App() {
+  const [actualTxtFile, setActualTxtFile] = useContext(TxtArchiveContext);
+  const [archives, setArchives] = useContext(ArchivesContext)
+  const [directory, setDirectory] = useContext(DirectoryContext)
+
+  useMemo(() => {
+  //  getAllArchives()
+  }, [])
+
+  useEffect(() => {
+    if (actualTxtFile) console.log(actualTxtFile);
+  }, [actualTxtFile]);
+
+  return (
+    <div className="bg-image-background flex justify-center items-center object-cover bg-cover bg-center h-screen">
+      <Window />
+      {actualTxtFile && <Editor />}
+    </div>
+  );
+}
+
+export default App;
