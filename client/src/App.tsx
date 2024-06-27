@@ -21,6 +21,7 @@ function App() {
 
   useEffect(() => {
     async function getData() {
+      setArchives([]);
       if (directory.length > 0) {
         let responseArchives = await getAllArchivesByFolderId(
           directory[directory.length - 1]?.id
