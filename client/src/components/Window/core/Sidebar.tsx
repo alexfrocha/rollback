@@ -1,31 +1,39 @@
-import { MouseEvent, useRef, useState } from "react";
+import React, { MouseEvent, useRef, useState } from "react";
 import SideFolder from "../../core/SideFolder";
+import { generateRandomId } from "../../../utils/id";
+import { ArchiveProps } from "../../../interfaces/core";
+import { createArchive } from "../../../service/archiveService";
 
-export default function Sidebar() {
-  const initialFolders = [
-    {
-      name: "desktop",
-      size: 20,
-      id: 1,
-    },
-    {
-      name: "feedbacks",
-      size: 20,
-      id: 2,
-    },
-  ];
+interface Props {
+  folders: ArchiveProps[];
+  setFolders: React.Dispatch<React.SetStateAction<ArchiveProps[]>>;
+}
 
-  const [folders, setFolders] = useState(initialFolders);
-
-  const handle_create_folder = () => {
+export default function Sidebar({ folders, setFolders }: Props) {
+  const handle_create_folder = async () => {
     let new_folders = [...folders];
-    let new_folder = {
-      name: "",
-      size: 20,
-      id: 3,
+    let new_folder: ArchiveProps = {
+      name: "new folder",
+      // id: generateRandomId(),
+      content: "",
+      folderId: "source",
+      userId: "123",
+      type: "folder",
     };
-    new_folders.push(new_folder);
-    setFolders(new_folders);
+
+    let { name, folderId, content, type, userId } = new_folder;
+
+    let responseArchive = await createArchive({
+      name,
+      type,
+      content,
+      folderId,
+      userId,
+    }).then((response) => {
+      new_folder.id = response.id;
+      new_folders.push(new_folder);
+      setFolders(new_folders);
+    });
   };
 
   return (
@@ -38,7 +46,7 @@ export default function Sidebar() {
             key={folder.id}
             name={folder.name}
             size={20}
-            id={folder.id}
+            id={folder.id!}
           />
         ))}
       </div>

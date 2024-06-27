@@ -1,31 +1,31 @@
-import React, { createContext, useState, ReactNode } from "react";
-import { generateRandomId } from "../components/utils/id";
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  useEffect,
+  useContext,
+} from "react";
+import { generateRandomId } from "../utils/id";
+import { ArchivesContext } from "./Archives";
+import { getAllArchivesByFolderId } from "../service/archiveService";
+import { ArchiveNameAndIdProps } from "../interfaces/core";
+// import { ArchiveProps } from "../interfaces/core";
 
 interface DirectoryProviderProps {
   children: ReactNode;
 }
 
 export const DirectoryContext = createContext<
-  [Object[], React.Dispatch<React.SetStateAction<Object[]>>]
+  [
+    ArchiveNameAndIdProps[],
+    React.Dispatch<React.SetStateAction<ArchiveNameAndIdProps[]>>
+  ]
 >([[], () => {}]);
 
 export default function DirectoryProvider({
   children,
 }: DirectoryProviderProps) {
-  const [directory, setDirectory] = useState<Object[]>([
-    {
-      name: "projects",
-      size: 40,
-      id: generateRandomId(),
-      type: "folder",
-    },
-    {
-      name: "about",
-      size: 40,
-      id: generateRandomId(),
-      type: "txt",
-    },
-  ]);
+  const [directory, setDirectory] = useState<ArchiveNameAndIdProps[]>([]);
 
   return (
     <DirectoryContext.Provider value={[directory, setDirectory]}>

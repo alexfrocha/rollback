@@ -40,6 +40,11 @@ public class ArchiveService {
     }
 
     public void deleteArchive(String id) {
+        List<Archive> dependentArchives = archiveRepository.findArchivesByFolderId(id);
+        for (Archive archive : dependentArchives) {
+            deleteArchive(archive.getId());
+            // System.out.println(archive.getName() + " and descendents are been deleting");
+        }
         archiveRepository.deleteById(id);
     }
     

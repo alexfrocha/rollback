@@ -12,18 +12,20 @@ public class Archive {
     private String folderId;
     private String userId;
     private String content;
+    private String type;
 
     public Archive() {}
 
-    public Archive(String id, String name, String folderId, String userId) {
+    public Archive(String id, String name, String folderId, String userId, String type) {
         super();
         this.id = id;
         this.name = name;
         this.folderId = folderId;
         this.userId = userId;
+        this.type = type;
     }
 
-    public Archive(String id, String name, String content, String folderId, String userId) {
+    public Archive(String id, String name, String content, String type, String folderId, String userId) {
         super();
         this.id = id;
         this.name = name;
@@ -72,6 +74,15 @@ public class Archive {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
 
 }

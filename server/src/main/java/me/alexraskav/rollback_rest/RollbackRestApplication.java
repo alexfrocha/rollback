@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableMongoRepositories
 public class RollbackRestApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(RollbackRestApplication.class, args);
 	}

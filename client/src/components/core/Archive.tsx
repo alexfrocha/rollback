@@ -3,7 +3,10 @@ import { DirectoryContext } from "../../context/Directory";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
 import ArchiveContextMenu from "../Window/core/ArchiveContextMenu";
 import { TxtArchiveContext } from "../../context/TxtArchive";
-import { generateRandomId } from "../utils/id";
+import { generateRandomId } from "../../utils/id";
+import { deleteArchive, updateArchive } from "../../service/archiveService";
+import { ArchiveProps } from "../../interfaces/core";
+import { updateArrayById } from "../../utils/array";
 
 interface Props {
   name?: string;
@@ -33,7 +36,9 @@ export default function Archive({
   const [dir, setDir] = useContext(DirectoryContext);
   const [route, setRoute] = useState("");
   const [archiveName, setArchiveName] = useState(name || "");
-  const [nameInput, setNameInput] = useState(archiveName || "new folder");
+  const [nameInput, setNameInput] = useState(
+    archiveName || (type == "folder" ? "new folder" : "new text")
+  );
   const [contextMenu, setContextMenu] = useState(initialContextMenu);
   const closeContextMenu = () => setContextMenu(initialContextMenu);
 
@@ -43,10 +48,11 @@ export default function Archive({
 
   const move_to_route = () => {
     let new_dir = [...dir];
-    if (route) new_dir.push({
-      name: archiveName,
-      id: generateRandomId(),
-    });
+    if (route)
+      new_dir.push({
+        name: archiveName,
+        id,
+      });
     setDir(new_dir);
   };
 
@@ -58,23 +64,33 @@ export default function Archive({
 
   const open_txt_editor = (e?: MouseEvent) => {
     e?.stopPropagation();
-    setTxt(id);
+    setTxt(archives.filter((archive: ArchiveProps) => archive.id == id)[0]);
     closeContextMenu();
   };
 
-  useOnClickOutside(nameInputRef, (e: any) => {
+  useOnClickOutside(nameInputRef, async (e: any) => {
     setArchiveName(nameInput);
+    let new_archives = updateArrayById(archives, id, { name: nameInput });
+    let archiveIndex = archives.findIndex(
+      (item: ArchiveProps) => item.id == id
+    );
+    setArchives(new_archives);
+    await updateArchive(`${id}`, {
+      name: nameInput.trim(),
+      content: archives[archiveIndex]["content"],
+    });
   });
 
-  const exclude_archive = (e: MouseEvent) => {
+  const exclude_archive = async (e: MouseEvent) => {
     e.stopPropagation(); // Impede a propagação do clique
     let new_archives = archives.filter((archive: any) => archive.id != id);
     setArchives(new_archives);
+    await deleteArchive(`${id}`);
     closeContextMenu();
   };
 
   const handleContextMenu = (
-    e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
+    e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
   ) => {
     e.preventDefault();
     const { pageX, pageY } = e;
@@ -148,7 +164,7 @@ export default function Archive({
             height={size}
             onClick={() => {
               if (type == "txt") {
-                if (!txt) open_txt_editor();
+                if (!txt.id) open_txt_editor();
               }
             }}
           />
