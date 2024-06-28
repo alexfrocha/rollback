@@ -139,7 +139,7 @@ export default function Archive({
               ref={nameInputRef}
               type="text"
               value={nameInput}
-              className="text-[14px] font-mono w-[200%] text-center bg-transparent outline-none border-none"
+              className="text-[12px] font-mono w-[200%] text-center bg-transparent outline-none -mt-1 border-none"
               autoFocus
               onChange={(e) => setNameInput(e.target.value)}
             />
@@ -147,7 +147,7 @@ export default function Archive({
             <span
               spellCheck={false}
               style={{ maxWidth: size * 2 }}
-              className="text-[15px] font-mono text-ellipsis overflow-hidden text-center text-nowrap -mt-1 font-thin"
+              className="text-[12px] font-mono text-ellipsis overflow-hidden text-center text-nowrap -mt-1 font-thin"
             >
               {archiveName}
             </span>
@@ -174,7 +174,7 @@ export default function Archive({
               ref={nameInputRef}
               type="text"
               value={nameInput}
-              className="text-[14px] font-mono w-[200%] text-center bg-transparent outline-none border-none"
+              className="text-[12px] font-mono w-[200%] text-center bg-transparent outline-none -mt-1 border-none"
               autoFocus
               onChange={(e) => setNameInput(e.target.value)}
             />
@@ -182,7 +182,7 @@ export default function Archive({
             <span
               spellCheck={false}
               style={{ maxWidth: size * 2 }}
-              className="text-[15px] font-mono text-ellipsis overflow-hidden text-center text-nowrap -mt-1 font-thin"
+              className="text-[12px] font-mono text-ellipsis overflow-hidden text-center text-nowrap -mt-1 font-thin"
             >
               {archiveName}.txt
             </span>
