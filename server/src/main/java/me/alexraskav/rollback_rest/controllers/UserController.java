@@ -22,7 +22,7 @@ import me.alexraskav.rollback_rest.services.UserService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
     
     @Autowired
@@ -39,12 +39,20 @@ public class UserController {
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+
+    @GetMapping("/username/{id}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String id) {
+        Optional<User> user = service.getUserByUsername(id);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
     @PostMapping("/")
     public User createUser(@RequestBody User user) {
         String passwordSecret = BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray());
         user.setPassword(passwordSecret);
         return service.saveUser(user);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateArchive(@PathVariable String id, @RequestBody User userDetails) {
