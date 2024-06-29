@@ -138,7 +138,7 @@ export default function SideFolder({
           ref={nameInputRef}
           type="text"
           value={nameInput}
-          className="text-[14px] font-mono w-[80%] bg-transparent outline-none border-none"
+          className="text-[12px] font-mono w-[80%] bg-transparent outline-none border-none"
           autoFocus
           onChange={(e) => setNameInput(e.target.value)}
         />
