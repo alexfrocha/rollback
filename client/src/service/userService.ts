@@ -27,7 +27,6 @@ export async function getUserById({id}: {id: string}) {
     } = {}
     await axios.get(`${BASE_API}/api/user/${id}`)
         .then((response) => {
-            console.log(response.data)
             requestedUser = response.data
         })
         .catch((error) => {

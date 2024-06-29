@@ -3,7 +3,7 @@ import { TxtArchiveContext } from "../../../context/TxtArchive";
 
 interface Props {
   content: string;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
+  setContent: React.Dispatch<React.SetStateAction<string>>  
 }
 
 export default function Content({ content, setContent }: Props) {
@@ -16,7 +16,7 @@ export default function Content({ content, setContent }: Props) {
       onChange={(e) => {
         setContent(String(e.target.value));
       }}
-      className="h-full resize-none outline-none bg-none m-3"
+      className="h-full outline-none bg-none m-3"
       name=""
       id=""
     ></textarea>

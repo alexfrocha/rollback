@@ -51,8 +51,6 @@ async function updateArchive(
     })
     .then((response) => {
       archive = response.data;
-      console.log(content);
-      console.log(`[UPDATE ARCHIVE] archive #${id} has been updated`);
     })
     .catch((error) => {
       console.log(defaultErrorRequestMessage + error);
@@ -64,7 +62,6 @@ function deleteArchive(id: string) {
   axios
     .delete(`${BASE_API}/api/archives/${id}`)
     .then((response) => {
-      console.log(`[DELETE ARCHIVE] archive #${id} has been deleted`);
     })
     .catch((error) => {
       console.log(defaultErrorRequestMessage + error);
@@ -77,7 +74,6 @@ async function getAllArchivesByFolderId(folderId: string) {
     .get(`${BASE_API}/api/archives/folder/${folderId}`)
     .then((response) => {
       archives = response.data;
-      console.log(`[GET ARCHIVE] getting archives from #${folderId} folder`);
     })
     .catch((error) => {
       console.log(defaultErrorRequestMessage + error);
@@ -91,7 +87,6 @@ async function getSourceFolderByUserId(userId: string) {
     .get(`${BASE_API}/api/archives/folder/source/${userId}`)
     .then((response) => {
       archives = response.data;
-      console.log(`[GET ARCHIVE] getting source archives from #${userId} user`);
     })
     .catch((error) => {
       console.log(defaultErrorRequestMessage + error);
