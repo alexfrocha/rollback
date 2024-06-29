@@ -11,11 +11,13 @@ import { generateRandomId } from "../../../utils/id";
 import { ArchiveNameAndIdProps, ArchiveProps } from "../../../interfaces/core";
 import { createArchive } from "../../../service/archiveService";
 import { convertToRouteSlug } from "../../../utils/route";
+import { useCookies } from "react-cookie";
 
 export default function Navbar() {
   const [directory, setDirectory] = useContext(DirectoryContext);
   const [last_folder, setLastFolder] = useState<ArchiveNameAndIdProps | null>();
   const [archives, setArchives] = useContext(ArchivesContext);
+  const [cookies, setCookie] = useCookies(['user', "username"])
 
   const move_back = () => {
     let new_dir = [...directory];
@@ -39,7 +41,7 @@ export default function Navbar() {
       type: typeraw,
       content: "",
       folderId: directory[directory.length - 1]?.id,
-      userId: "123",
+      userId: cookies.user,
     };
     let { name, type, content, folderId, userId } = archive;
     let responseArchive = await createArchive({
@@ -73,7 +75,7 @@ export default function Navbar() {
             </div>
           </div>
           <span className="font-mono text-[12px] text-nowrap text-ellipsis overflow-hidden max-w-[400px]">
-            @rsk/
+            @{cookies.username}/
             {directory
               .map((dir: any) => convertToRouteSlug(dir.name))
               .join("/")}

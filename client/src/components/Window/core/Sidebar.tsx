@@ -3,6 +3,7 @@ import SideFolder from "../../core/SideFolder";
 import { generateRandomId } from "../../../utils/id";
 import { ArchiveProps } from "../../../interfaces/core";
 import { createArchive } from "../../../service/archiveService";
+import { useCookies } from "react-cookie";
 
 interface Props {
   folders: ArchiveProps[];
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export default function Sidebar({ folders, setFolders }: Props) {
+  const [cookies, setCookie] = useCookies(['user'])
   const handle_create_folder = async () => {
     let new_folders = [...folders];
     let new_folder: ArchiveProps = {
@@ -17,7 +19,7 @@ export default function Sidebar({ folders, setFolders }: Props) {
       // id: generateRandomId(),
       content: "",
       folderId: "source",
-      userId: "123",
+      userId: cookies.user,
       type: "folder",
     };
 
@@ -36,9 +38,13 @@ export default function Sidebar({ folders, setFolders }: Props) {
     });
   };
 
+  const log_out = () => {
+    setCookie('user', '')
+  }
+
   return (
     <div className="bg-zinc-200/80 flex flex-col w-[25%] h-full rounded-l-[8px] backdrop-blur-[10px] filter">
-      <div className="p-3 flex flex-col overflow-auto h-[90%] ">
+      <div className="p-3 flex flex-col overflow-auto h-[80%]  ">
         {folders.map((folder) => (
           <SideFolder
             folders={folders}
@@ -52,9 +58,15 @@ export default function Sidebar({ folders, setFolders }: Props) {
       </div>
       <div
         onClick={handle_create_folder}
-        className="mt-auto m-3 text-[12px] text-center cursor-pointer hover:opacity-40 duration-200 font-mono text-green-800 border border-green-800 rounded-[9px]  py-[2px]"
+        className="mt-auto m-3 text-[12px] text-center cursor-pointer hover:opacity-40 duration-200 font-mono text-green-800 border border-green-800 rounded-[9px]  py-[4px]"
       >
         {"<new folder />"}
+      </div>
+      <div
+        onClick={log_out}
+        className="m-3 -mt-2 text-[12px] text-center cursor-pointer hover:opacity-40 duration-200 font-mono text-white border-[2px] border-black bg-black rounded-[9px]  py-[4px]"
+      >
+        {"<log out />"}
       </div>
     </div>
   );
