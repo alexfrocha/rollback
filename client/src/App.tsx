@@ -13,11 +13,14 @@ import { DirectoryContext } from "./context/Directory";
 // import { getAllArchives } from "./service/archiveService";
 import axios from "axios";
 import { getAllArchivesByFolderId } from "./service/archiveService";
+import Alert from "./components/Alert";
+import { AlertContext } from "./context/Alert";
 
 function App() {
   const [actualTxtFile, setActualTxtFile] = useContext(TxtArchiveContext);
   const [archives, setArchives] = useContext(ArchivesContext);
   const [directory, setDirectory] = useContext(DirectoryContext);
+  const [alert, setAlert] = useContext(AlertContext)
 
   useEffect(() => {
     async function getData() {
@@ -40,6 +43,7 @@ function App() {
     <div className="bg-image-background flex justify-center items-center object-cover bg-cover bg-center h-screen">
       <Window />
       {actualTxtFile.id && <Editor />}
+      {alert && <Alert />}
     </div>
   );
 }
