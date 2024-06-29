@@ -5,6 +5,7 @@ import App from "./App";
 import DirectoryProvider from "./context/Directory";
 import TxtArchiveProvider from "./context/TxtArchive";
 import ArchivesProvider from "./context/Archives";
+import AlertProvider from "./context/Alert";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -14,7 +15,9 @@ root.render(
   <DirectoryProvider>
     <TxtArchiveProvider>
       <ArchivesProvider>
-        <App />
+        <AlertProvider>
+          <App />
+        </AlertProvider>
       </ArchivesProvider>
     </TxtArchiveProvider>
   </DirectoryProvider>

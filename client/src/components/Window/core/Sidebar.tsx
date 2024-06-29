@@ -52,7 +52,7 @@ export default function Sidebar({ folders, setFolders }: Props) {
       </div>
       <div
         onClick={handle_create_folder}
-        className="mt-auto m-3 text-center cursor-pointer hover:opacity-40 duration-200 font-mono text-green-800 border border-green-800 rounded-[9px]  py-[2px]"
+        className="mt-auto m-3 text-[12px] text-center cursor-pointer hover:opacity-40 duration-200 font-mono text-green-800 border border-green-800 rounded-[9px]  py-[2px]"
       >
         {"<new folder />"}
       </div>

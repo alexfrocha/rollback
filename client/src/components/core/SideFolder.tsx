@@ -113,7 +113,7 @@ export default function SideFolder({
       onContextMenu={handleContextMenu}
       className={`flex flex-row gap-1 ${
         directory[0]?.id == id && "bg-zinc-800/10"
-      } items-center p-2 py-1 w-full hover:cursor-pointer duration-200 hover:bg-white/30 rounded-[9px]`}
+      } items-center p-2 py-1 w-full gap-1 hover:cursor-pointer duration-200 hover:bg-white/30 rounded-[9px]`}
     >
       {contextMenu.show && (
         <SidebarContextMenu
@@ -145,7 +145,7 @@ export default function SideFolder({
       ) : (
         <span
           spellCheck={false}
-          className="text-[14px] font-mono text-nowrap text-ellipsis overflow-hidden w-[80%]"
+          className="text-[12px] font-mono text-nowrap text-ellipsis overflow-hidden w-[80%]"
         >
           {folderName}
         </span>
