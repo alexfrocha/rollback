@@ -11,6 +11,7 @@ import {
   getSourceFolderByUserId,
 } from "../service/archiveService";
 import { ArchivesContext } from "../context/Archives";
+import { useCookies } from "react-cookie";
 
 interface Props {
   children?: React.ReactNode;
@@ -19,14 +20,31 @@ interface Props {
 export default function Window({ children }: Props) {
   const [archives, setArchives] = useContext(ArchivesContext);
   const [folders, setFolders] = useState<ArchiveProps[]>([]);
+  const [directory, setDirectory] = useContext(DirectoryContext)
+  const [cookies, setCookie] = useCookies(['user'])
+  
 
   useEffect(() => {
     async function getData() {
-      let responseSourceFolders = await getSourceFolderByUserId("123");
+      let responseSourceFolders = await getSourceFolderByUserId(cookies.user);
       setFolders(responseSourceFolders);
     }
     getData();
   }, []);
+
+
+  useEffect(() => {
+    async function getData() {
+      setArchives([]);
+      if (directory.length > 0) {
+        let responseArchives = await getAllArchivesByFolderId(
+          directory[directory.length - 1]?.id
+        );
+        setArchives(responseArchives);
+      }
+    }
+    getData();
+  }, [directory]);
 
   useEffect(() => {
     // console.log(archives);
