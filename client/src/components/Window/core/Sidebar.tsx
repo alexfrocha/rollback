@@ -1,9 +1,10 @@
-import React, { MouseEvent, useRef, useState } from "react";
+import React, { MouseEvent, useContext, useRef, useState } from "react";
 import SideFolder from "../../core/SideFolder";
 import { generateRandomId } from "../../../utils/id";
 import { ArchiveProps } from "../../../interfaces/core";
 import { createArchive } from "../../../service/archiveService";
 import { useCookies } from "react-cookie";
+import { DirectoryContext } from "../../../context/Directory";
 
 interface Props {
   folders: ArchiveProps[];
@@ -12,6 +13,7 @@ interface Props {
 
 export default function Sidebar({ folders, setFolders }: Props) {
   const [cookies, setCookie] = useCookies(['user'])
+  const [directory, setDirectory] = useContext(DirectoryContext)
   const handle_create_folder = async () => {
     let new_folders = [...folders];
     let new_folder: ArchiveProps = {
@@ -40,6 +42,7 @@ export default function Sidebar({ folders, setFolders }: Props) {
 
   const log_out = () => {
     setCookie('user', '')
+    setDirectory([])
   }
 
   return (
