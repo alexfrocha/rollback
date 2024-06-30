@@ -7,7 +7,7 @@
 
 I'm here to show you how I've been storing information like article links, even gmail accounts and other things, the initial motivation for creating it was so that my friend and I could have a platform where we would store our personal information instead to do tricks like sending a dm to a bot on discord like Loritta
 
-You can test it <a href="https://rollback-e8zs.onrender.com/">clicking here</a> and watch me using it <a href="">here</a>.
+You can test it <a href="https://rollback-e8zs.onrender.com/">clicking here</a> and watch me using it <a href="https://www.youtube.com/watch?v=cRqlp8pHFjA">here</a>.
 
 ### Our dialogue
 > **You:** Hey alex the platform is very slow, f*** that. </br>
