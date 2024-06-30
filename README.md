@@ -39,10 +39,10 @@ npm install
 
 **3 - setting up .env variables**
 ```js
-// server-side [./server]
+// server-side [./server/.env]
 MONGODB_URI="your.mongodb-url.com/database-name"
 
-// client-side [./client]
+// client-side [./client/.env]
 REACT_APP_API_URL="your back-end url" //for example: http://localhost:8080, but dont put the final "/", remove that
 ```
 
