@@ -20,7 +20,7 @@ You can test it <a href="https://rollback-e8zs.onrender.com/">clicking here</a> 
 > **Me:** Nah, don't worry that's fine, be happy man, life is good </br>
 > **Me:** and i made a cron-job to bypass that, but don't tell to nobdy
 
-(PS: i don't use drugs)
+(PS: no, i'm not schizophrenic. trust me)
 
 
 ### How can i install it in my machine?
