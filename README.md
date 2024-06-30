@@ -6,7 +6,7 @@
 
 I'm here to show you how I've been storing information like article links, even gmail accounts and other things, the initial motivation for creating it was so that my friend and I could have a platform where we would store our personal information instead to do tricks like sending a dm to a bot on discord like Loritta
 
-You can test it <a href="https://rollback-e8zs.onrender.com/">clicking here</a>.
+You can test it <a href="https://rollback-e8zs.onrender.com/">clicking here</a> and watching me talkin some dumb stuff about that <a href="">here</a>.
 
 ### Our dialogue
 > **You:** Hey alex the platform is very slow, f*** that. </br>
@@ -16,9 +16,44 @@ You can test it <a href="https://rollback-e8zs.onrender.com/">clicking here</a>.
 
 ### The continuation of our friendly dialogue
 > **You:** Oh man, sorry about that, pardon me </br>
-> **Me:** Nah, don't worry that's fine, be happy man, life is good. </br>
+> **Me:** Nah, don't worry that's fine, be happy man, life is good </br>
+> **Me:** and i made a cron-job to bypass that, but don't tell to nobdy
 
 (PS: i don't use drugs)
 
 
-### How can i install it?
+### How can i install it in my machine?
+lets go buddy, firstly make sure u have the follow softwares installed <a href="https://maven.apache.org/">Maven</a>, <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">JDK 17</a> and <a href="https://nodejs.org/en">NodeJS</a>, after that lets make it work
+
+**1 - git clone the repo**
+```js
+git clone https://github.com/alexfrocha/rollback.git
+```
+
+**2 - install packages**
+```js
+cd ./client
+npm install
+```
+
+**3 - setting up .env variables**
+```js
+// server-side
+MONGODB_URI="your.mongodb-url.com/database-name"
+
+// client-side
+REACT_APP_API_URL="your back-end url" //for example: http://localhost:8080, but dont put the final "/", remove that
+```
+
+**4 - run project**
+```js
+// for client-side
+cd ./client
+npm start
+
+// for server-side
+cd ./server
+mvn spring-boot:run
+```
+
+**5 - gimme a star 😃**
