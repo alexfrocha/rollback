@@ -1,3 +1,4 @@
+![image](https://img.shields.io/badge/springboot-blue) ![image](https://img.shields.io/badge/java-orange) ![image](https://img.shields.io/badge/typescript-blue) ![image](https://img.shields.io/badge/react-blue) 
 # 👋 Howdy, lemme show u `rollback`
 
 ![image](https://github.com/alexfrocha/rollback/assets/107084445/060db954-7062-4803-a410-60166774fd6e)
